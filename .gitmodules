@@ -1,0 +1,15 @@
+[submodule "dependencies/libft"]
+	path = dependencies/libft
+	url = git@github.com:AhmedHodiani/libft.git
+[submodule "dependencies/libftprintf"]
+	path = dependencies/libftprintf
+	url = git@github.com:AhmedHodiani/libftprintf.git
+[submodule "dependencies/libgc"]
+	path = dependencies/libgc
+	url = git@github.com:AhmedHodiani/libgc.git
+[submodule "dependencies/libgnl"]
+	path = dependencies/libgnl
+	url = git@github.com:AhmedHodiani/libgnl.git
+[submodule "dependencies/minilibx-linux"]
+	path = dependencies/minilibx-linux
+	url = git@github.com:42Paris/minilibx-linux.git
