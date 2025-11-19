@@ -24,7 +24,7 @@ $(foreach lib,$(DEPENDENCIES),$(BUILD_PATH)/$(lib)/$(lib).a):
 	$(MAKE) -C $(DEPENDENCIES_DIR)/$(basename $(@F)) BUILD_PATH=../../$(BUILD_PATH)/$(basename $(@F)) all
 
 $(BUILD_PATH)/obj/%.o: src/%.c $(HEADERS)
-	@mkdir -p $(BUILD_PATH)/obj/complex
+	@mkdir -p $(BUILD_PATH)/obj
 	$(CC) $(CFLAGS) $(DEPENDENCIES_FLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 $(MINI_LIBX):
