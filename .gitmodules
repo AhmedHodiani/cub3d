@@ -13,3 +13,6 @@
 [submodule "dependencies/minilibx-linux"]
 	path = dependencies/minilibx-linux
 	url = git@github.com:42Paris/minilibx-linux.git
+[submodule "dependencies/libftsscanf"]
+	path = dependencies/libftsscanf
+	url = git@github.com:AhmedHodiani/libftsscanf.git
