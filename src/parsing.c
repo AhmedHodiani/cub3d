@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 14:19:36 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 14:42:09 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,11 @@ int	parse_config_line(t_config *config, const char *line)
 	return (result);
 }
 
-int	parse_config_file(t_config *config, const char *path)
+static int	read_config_lines(t_config *config, int fd)
 {
-	int		fd;
 	char	*line;
 	int		result;
 
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (-1);
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -67,12 +63,35 @@ int	parse_config_file(t_config *config, const char *path)
 		if (result < 0)
 		{
 			free(line);
-			close(fd);
 			return (-2);
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
+	return (0);
+}
+
+int	parse_config_file(t_config *config, const char *path)
+{
+	int		fd;
+	int		result;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	result = read_config_lines(config, fd);
 	close(fd);
+	if (result == -1)
+		ft_exit(1, "Failed to open map file");
+	if (result == -2)
+		ft_exit(1, "Invalid or duplicate identifier/s");
+	if (result < 0)
+		return (result);
+	if ((config->config_flags & FLAG_ALL) != FLAG_ALL)
+		ft_exit(1, "Missing identifier element/s");
+	if (parse_map(config, path) < 0)
+		ft_exit(1, "Invalid map format");
+	if (validate_map_walls(config) < 0)
+		ft_exit(1, "Map not properly closed by walls");
 	return (0);
 }

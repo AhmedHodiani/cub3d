@@ -14,7 +14,12 @@ MINI_LIBX			= $(DEPENDENCIES_DIR)/minilibx-linux/libmlx_Linux.a
 SRCS			=	src/main.c \
 					src/parsing.c \
 					src/utils_parsing.c \
-					src/utils_parsing2.c
+					src/utils_parsing2.c \
+					src/map_parsing.c \
+					src/map_reading.c \
+					src/map_validation.c \
+					src/map_validation2.c \
+					src/map_utils.c
 OBJS			= $(SRCS:src/%.c=$(BUILD_PATH)/obj/%.o)
 HEADERS			= include/cub3d.h
 

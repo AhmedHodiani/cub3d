@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 18:45:08 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 13:31:56 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 14:42:21 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,23 @@ void	ft_exit(int code, const char *message)
 	exit(code);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_config	config;
-	char		*path;
-	int			parse_result;
 
+	if (argc != 2)
+		ft_exit(1, "Usage: ./cub3D <map.cub>");
 	if (gc_init() != 0)
 		ft_exit(1, "Failed to initialize garbage collector");
 	ft_memset(&config, 0, sizeof(t_config));
-	path = "./maps/valid/cross_shape.cub";
-	parse_result = parse_config_file(&config, path);
-	if (parse_result == -1)
-		ft_exit(1, "Failed to open map file");
-	if (parse_result == -2)
-		ft_exit(1, "Invalid or duplicate identifier/s");
-	if ((config.config_flags & FLAG_ALL) != FLAG_ALL)
-		ft_exit(1, "Missing identifier element/s");
+	parse_config_file(&config, argv[1]);
 	print_config(&config);
+	ft_printf("Map: %dx%d, Player at (%d, %d)\n",
+		config.map.width, config.map.height,
+		config.map.player_pos[0], config.map.player_pos[1]);
+	ft_printf("Map grid:\n");
+	for (int i = 0; i < config.map.height; i++)
+		ft_printf("[%s]\n", config.map.grid[i]);
 	ft_exit(0, NULL);
 	return (0);
 }

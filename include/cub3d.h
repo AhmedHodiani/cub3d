@@ -14,11 +14,13 @@
 
 /* Map parsing structures */
 
-typedef struct s_vector
+typedef enum e_direction
 {
-	double	x;
-	double	y;
-}	t_vector;
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+}	t_direction;
 
 typedef struct s_color
 {
@@ -37,13 +39,11 @@ typedef struct s_textures
 
 typedef struct s_map
 {
-	char	**grid;
-	int		width;
-	int		height;
-	int		*line_lengths;
-	int		player_x;
-	int		player_y;
-	char	player_dir;
+	char			**grid;
+	int				width;
+	int				height;
+	int				player_pos[2];
+	t_direction		player_dir;
 }	t_map;
 
 typedef struct s_config
@@ -57,9 +57,7 @@ typedef struct s_config
 
 typedef struct s_player
 {
-	t_vector	pos;
-	t_vector	dir;
-	t_vector	plane;
+	// idk
 }	t_player;
 
 typedef struct s_game
@@ -79,6 +77,9 @@ typedef struct s_game
 # define FLAG_C  0x20
 # define FLAG_ALL 0x3F
 
+/* Exit */
+void	ft_exit(int code, const char *message);
+
 /* Parsing functions */
 void	print_config(t_config *config);
 int		parse_config_file(t_config *config, const char *path);
@@ -96,5 +97,19 @@ int		parse_color_floor(t_config *config, const char *line);
 int		parse_color_ceiling(t_config *config, const char *line);
 int		set_color(t_config *config, t_color *color, int flag);
 int		validate_color(int r, int g, int b);
+
+/* Map parsing functions */
+int		parse_map(t_config *config, const char *path);
+int		read_map_content(t_config *config, const char *path);
+int		find_player(t_config *config);
+int		validate_map_walls(t_config *config);
+int		check_internal_walls(t_config *config);
+int		check_sides(t_config *config, int row);
+
+/* Map utility functions */
+int		is_map_char(char c);
+int		is_map_line(const char *line);
+int		get_line_length(const char *line);
+int		store_map_line(t_config *config, char *line, int idx);
 
 #endif
