@@ -11,7 +11,8 @@ DEPENDENCIES_FLAGS	= $(foreach lib,$(DEPENDENCIES),-L$(BUILD_PATH)/$(lib)) \
 INCLUDE_FLAGS		= -Iinclude $(foreach lib,$(DEPENDENCIES),-Iinclude/$(lib))
 MINI_LIBX			= $(DEPENDENCIES_DIR)/minilibx-linux/libmlx_Linux.a
 
-SRCS			=	src/main.c
+SRCS			=	src/main.c \
+					src/parsing.c
 OBJS			= $(SRCS:src/%.c=$(BUILD_PATH)/obj/%.o)
 HEADERS			= include/cub3d.h
 

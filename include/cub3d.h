@@ -79,4 +79,7 @@ typedef struct s_game
 # define FLAG_C  0x20
 # define FLAG_ALL 0x3F
 
+void	print_config(t_config *config);
+int	parse_config_file(t_config *config, const char *path);
+
 #endif
