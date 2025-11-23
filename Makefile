@@ -1,6 +1,6 @@
 NAME			= $(BUILD_PATH)/cub3D
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -Wno-error=cast-function-type
 BUILD_PATH		?= ./build
 
 DEPENDENCIES		= libft libftprintf libftsscanf libgc libgnl
@@ -12,6 +12,10 @@ INCLUDE_FLAGS		= -Iinclude $(foreach lib,$(DEPENDENCIES),-Iinclude/$(lib))
 MINI_LIBX			= $(DEPENDENCIES_DIR)/minilibx-linux/libmlx_Linux.a
 
 SRCS			=	src/main.c \
+					src/player.c \
+					src/rendering.c \
+					src/raycasting.c \
+					src/timing.c \
 					src/parsing/parsing.c \
 					src/parsing/utils_parsing.c \
 					src/parsing/utils_parsing2.c \

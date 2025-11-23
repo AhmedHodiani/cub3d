@@ -8,10 +8,25 @@
 # include "libgc.h"
 # include "libgnl.h"
 # include <limits.h>
+# include <sys/time.h>
 
+# define WIDTH 1200
+# define HEIGHT 800
 
-# define WIDTH 800
-# define HEIGHT 600
+/* FPS and timing */
+# define TARGET_FPS 60
+# define FRAME_TIME_US 16666
+# define MOVE_SPEED 3.0
+# define ROT_SPEED 2.0
+
+/* Minimap settings */
+# define MINIMAP_SCALE 60
+# define MINIMAP_OFFSET_X 20
+# define MINIMAP_OFFSET_Y 20
+# define MINIMAP_COLOR_WALL 0xFFFFFF
+# define MINIMAP_COLOR_FLOOR 0x333333
+# define MINIMAP_COLOR_PLAYER 0xFF0000
+# define MINIMAP_COLOR_RAY 0x00FF00
 
 /* Key codes */
 # define KEY_ESC 65307
@@ -19,6 +34,8 @@
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
 
 /* Map tile types */
 # define WALL '1'
@@ -70,8 +87,38 @@ typedef struct s_config
 
 typedef struct s_player
 {
-	// idk
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 }	t_player;
+
+typedef struct s_keys
+{
+	int	w;
+	int	a;
+	int	s;
+	int	d;
+	int	left;
+	int	right;
+}	t_keys;
+
+typedef struct s_time
+{
+	long	last_frame;
+	double	delta_time;
+}	t_time;
+
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_image;
 
 typedef struct s_game
 {
@@ -79,6 +126,9 @@ typedef struct s_game
 	void		*win;
 	t_config	config;
 	t_player	player;
+	t_image		img;
+	t_keys		keys;
+	t_time		time;
 }	t_game;
 
 /* Config flags for validation */
@@ -126,8 +176,32 @@ int		get_line_length(const char *line);
 int		store_map_line(t_config *config, char *line, int idx);
 
 /* Game/MLX functions */
-int		close_window(t_game	*game);
+int		close_window(void *game);
 int		handle_keypress(int keycode, void *game);
+int		handle_keyrelease(int keycode, void *game);
 void	*game_loop(void *game);
+
+/* Timing functions */
+long	get_time_us(void);
+void	update_delta_time(t_game *game);
+void	cap_framerate(t_game *game);
+
+/* Player functions */
+void	init_player(t_game *game);
+void	move_forward(t_game *game, double move_speed);
+void	move_backward(t_game *game, double move_speed);
+void	strafe_left(t_game *game, double move_speed);
+void	strafe_right(t_game *game, double move_speed);
+void	rotate_left(t_game *game, double rot_speed);
+void	rotate_right(t_game *game, double rot_speed);
+void	process_movement(t_game *game);
+
+/* Rendering functions */
+void	render_frame(t_game *game);
+void	render_minimap(t_game *game);
+void	draw_minimap_tile(t_game *game, int x, int y, int color);
+void	draw_minimap_player(t_game *game);
+void	draw_minimap_rays(t_game *game);
+void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
 
 #endif
