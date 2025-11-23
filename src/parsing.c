@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 14:42:09 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 16:07:49 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,5 @@ int	parse_config_file(t_config *config, const char *path)
 		ft_exit(1, "Missing identifier element/s");
 	if (parse_map(config, path) < 0)
 		ft_exit(1, "Invalid map format");
-	if (validate_map_walls(config) < 0)
-		ft_exit(1, "Map not properly closed by walls");
 	return (0);
 }

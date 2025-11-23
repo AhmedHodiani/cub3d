@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 14:19:36 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 16:10:35 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void	print_config(t_config *config)
 		config->floor.r, config->floor.g, config->floor.b);
 	printf("Ceiling Color: R=%d, G=%d, B=%d\n",
 		config->ceiling.r, config->ceiling.g, config->ceiling.b);
+	ft_printf("Map: %dx%d, Player at (%d, %d)\n",
+		config->map.width, config->map.height,
+		config->map.player_pos[0], config->map.player_pos[1]);
 }
 
 int	set_texture(t_config *config, char **texture, char *path, int flag)
