@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 15:22:39 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 17:18:54 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ static int	check_position(t_config *config, int x, int y)
 	if (!is_valid_neighbor(config, x, y - 1))
 		return (-1);
 	if (!is_valid_neighbor(config, x, y + 1))
+		return (-1);
+	if (!is_valid_neighbor(config, x - 1, y - 1))
+		return (-1);
+	if (!is_valid_neighbor(config, x + 1, y - 1))
+		return (-1);
+	if (!is_valid_neighbor(config, x - 1, y + 1))
+		return (-1);
+	if (!is_valid_neighbor(config, x + 1, y + 1))
 		return (-1);
 	return (0);
 }
