@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 16:07:49 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 17:51:03 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,37 @@ static int	parse_all_colors(t_config *config, const char *line)
 	return (result);
 }
 
+static int	has_invalid_identifier(const char *line)
+{
+	int		i;
+
+	i = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	if (!line[i] || line[i] == '\n')
+		return (0);
+	while (line[i] && line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+		i++;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	if (line[i] && line[i] != '\n')
+		return (1);
+	return (0);
+}
+
 int	parse_config_line(t_config *config, const char *line)
 {
-	int	result;
+	int		result;
 
 	result = parse_all_textures(config, line);
 	if (result != 0)
 		return (result);
 	result = parse_all_colors(config, line);
-	return (result);
+	if (result != 0)
+		return (result);
+	if (has_invalid_identifier(line))
+		return (-1);
+	return (0);
 }
 
 static int	read_config_lines(t_config *config, int fd)
