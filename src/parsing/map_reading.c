@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 18:36:11 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 23:26:56 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,21 @@ static int	is_non_empty_line(const char *line)
 	while (line[i] == ' ' || line[i] == '\t')
 		i++;
 	return (line[i] && line[i] != '\n');
+}
+
+static int	check_remaining_lines(int fd)
+{
+	char	*line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (is_non_empty_line(line))
+			return (free(line), -1);
+		free(line);
+		line = get_next_line(fd);
+	}
+	return (0);
 }
 
 static int	process_map_lines(t_config *config, int fd)
@@ -45,16 +60,8 @@ static int	process_map_lines(t_config *config, int fd)
 		line = get_next_line(fd);
 	}
 	if (line)
-	{
-		while (line)
-		{
-			if (is_non_empty_line(line))
-				return (free(line), -1);
-			free(line);
-			line = get_next_line(fd);
-		}
-	}
-	return (0);
+		free(line);
+	return (check_remaining_lines(fd));
 }
 
 int	read_map_content(t_config *config, const char *path)

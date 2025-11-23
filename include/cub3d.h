@@ -176,6 +176,7 @@ void	ft_exit(int code, const char *message);
 
 /* Parsing functions */
 void	print_config(t_config *config);
+void	print_map(char **grid, int height);
 int		parse_config_file(t_config *config, char *path);
 int		parse_config_line(t_config *config, const char *line);
 
@@ -207,6 +208,7 @@ int		get_line_length(const char *line);
 int		store_map_line(t_config *config, char *line, int idx);
 
 /* Game/MLX functions */
+void	init_mlx(t_game *game);
 int		close_window(void *game);
 int		handle_keypress(int keycode, void *game);
 int		handle_keyrelease(int keycode, void *game);
@@ -219,6 +221,7 @@ void	cap_framerate(t_game *game);
 
 /* Player functions */
 void	init_player(t_game *game);
+int		can_move_to(t_game *game, double new_x, double new_y);
 void	move_forward(t_game *game, double move_speed);
 void	move_backward(t_game *game, double move_speed);
 void	strafe_left(t_game *game, double move_speed);
@@ -232,12 +235,15 @@ void	load_textures(t_game *game);
 int		get_texture_color(t_texture *texture, int x, int y);
 
 /* Raycasting functions */
-void	init_ray(t_game *game, t_ray *ray, int x);
-void	calculate_step_and_side_dist(t_game *game, t_ray *ray);
-void	perform_dda(t_game *game, t_ray *ray);
-void	calculate_wall_distance(t_game *game, t_ray *ray);
-void	render_3d(t_game *game);
-void	draw_wall_stripe(t_game *game, t_ray *ray, int x);
+void		init_ray(t_game *game, t_ray *ray, int x);
+void		calculate_step_and_side_dist(t_game *game, t_ray *ray);
+void		perform_dda(t_game *game, t_ray *ray);
+void		calculate_wall_distance(t_game *game, t_ray *ray);
+void		render_3d(t_game *game);
+void		draw_wall_stripe(t_game *game, t_ray *ray, int x);
+t_texture	*get_wall_texture(t_game *game, t_ray *ray);
+int			calculate_tex_x(t_ray *ray, double wall_x, int tex_width);
+double		calculate_wall_x(t_game *game, t_ray *ray);
 
 /* Rendering functions */
 void	render_frame(t_game *game);
@@ -246,5 +252,11 @@ void	draw_minimap_tile(t_game *game, int x, int y, int color);
 void	draw_minimap_player(t_game *game);
 void	draw_minimap_rays(t_game *game);
 void	my_mlx_pixel_put(t_image *img, int x, int y, int color);
+int		get_tile_color(t_game *game, int map_x, int map_y);
+void	get_camera_start(t_game *game, int *cam_start_x, int *cam_start_y);
+void	get_player_center(t_game *game, int *center_x, int *center_y);
+int		check_wall_hit(t_game *game, int map_x, int map_y);
+int		get_max_steps(int dx, int dy);
+void	init_line_vars(int *coords, float *vars);
 
 #endif

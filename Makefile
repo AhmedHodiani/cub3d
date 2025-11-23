@@ -12,14 +12,23 @@ INCLUDE_FLAGS		= -Iinclude $(foreach lib,$(DEPENDENCIES),-Iinclude/$(lib))
 MINI_LIBX			= $(DEPENDENCIES_DIR)/minilibx-linux/libmlx_Linux.a
 
 SRCS			=	src/main.c \
+					src/game_utils.c \
+					src/input_handlers.c \
 					src/player.c \
+					src/player_movement.c \
+					src/player_rotation.c \
 					src/rendering.c \
+					src/rendering_utils.c \
 					src/rendering_3d.c \
+					src/rendering_3d_utils.c \
 					src/raycasting.c \
+					src/raycasting_utils.c \
 					src/raycasting_3d.c \
 					src/textures.c \
 					src/timing.c \
 					src/parsing/parsing.c \
+					src/parsing/parsing_config.c \
+					src/parsing/parsing_debug.c \
 					src/parsing/utils_parsing.c \
 					src/parsing/utils_parsing2.c \
 					src/parsing/map_parsing.c \
