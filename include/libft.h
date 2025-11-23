@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 10:58:00 by ataher            #+#    #+#             */
-/*   Updated: 2025/01/04 02:44:50 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 12:56:02 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,16 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
 void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 double	ft_atof(char *str);
+
+// garbage collector aware versions
+char	*gc_itoa(int n);
+char	**gc_split(char const *s, char c);
+char	*gc_strdup(const char *s);
+char	*gc_strjoin_delim(char *path1, char *path2, char delim);
+char	*gc_strjoin(char const *s1, char const *s2);
+char	*gc_strmapi(char const *s, char (*f)(unsigned int, char));
+char	*gc_strtrim(char const *s1, char const *set);
+char	*gc_substr(char const *s, unsigned int start, size_t len);
+
 
 #endif

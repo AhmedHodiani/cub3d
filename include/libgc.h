@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libgc.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ataher <ataher@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 16:02:22 by ataher            #+#    #+#             */
-/*   Updated: 2025/06/29 16:14:17 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/22 19:39:39 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ size_t			gc_count(void);
 t_gc_context	*gc_get_context(void);
 t_gc_context	**gc_get_context_ptr(void);
 int				gc_resize(t_gc_context *gc);
-int				gc_track_pointer(t_gc_context *gc, void *ptr);
-int				gc_untrack_pointer(t_gc_context *gc, void *ptr);
+int				gc_track_pointer(void *ptr);
+int				gc_untrack_pointer(void *ptr);
 void			*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 
 #endif

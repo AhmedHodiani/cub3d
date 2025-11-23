@@ -1,9 +1,9 @@
-NAME			= $(BUILD_PATH)/cub3d
+NAME			= $(BUILD_PATH)/cub3D
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror
 BUILD_PATH		?= ./build
 
-DEPENDENCIES		= libft libftprintf libgc libgnl
+DEPENDENCIES		= libft libftprintf libftsscanf libgc libgnl
 DEPENDENCIES_DIR	= ./dependencies
 DEPENDENCIES_FLAGS	= $(foreach lib,$(DEPENDENCIES),-L$(BUILD_PATH)/$(lib)) \
 						$(foreach lib,$(patsubst lib%,%, $(DEPENDENCIES)),-l$(lib)) \
