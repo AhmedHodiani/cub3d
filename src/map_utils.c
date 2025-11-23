@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 14:38:55 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 15:22:39 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	is_map_char(char c)
 {
-	return (c == '0' || c == '1' || c == 'N' || c == 'S'
-		|| c == 'E' || c == 'W' || c == ' ');
+	return (c == WALKABLE || c == WALL || c == 'N' || c == 'S'
+		|| c == 'E' || c == 'W' || c == NOT_WALKABLE);
 }
 
 int	is_map_line(const char *line)
@@ -31,7 +31,7 @@ int	is_map_line(const char *line)
 	{
 		if (!is_map_char(line[i]) && line[i] != '\n')
 			return (0);
-		if (line[i] != ' ' && line[i] != '\n')
+		if (line[i] != NOT_WALKABLE && line[i] != '\n')
 			has_content = 1;
 		i++;
 	}

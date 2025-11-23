@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 14:33:24 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 15:22:39 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 static int	get_char_at(t_config *config, int x, int y)
 {
 	if (y < 0 || y >= config->map.height)
-		return (' ');
+		return (-1);
 	if (x < 0 || x >= (int)ft_strlen(config->map.grid[y]))
-		return (' ');
+		return (-1);
 	return (config->map.grid[y][x]);
 }
 
 static int	is_valid_neighbor(t_config *config, int x, int y)
 {
-	char	c;
+	int	c;
 
 	c = get_char_at(config, x, y);
-	return (c == '1' || c == '0' || c == 'N'
+	if (c == -1 || c == NOT_WALKABLE)
+		return (0);
+	return (c == WALL || c == WALKABLE || c == 'N'
 		|| c == 'S' || c == 'E' || c == 'W');
 }
 
@@ -56,7 +58,7 @@ int	check_internal_walls(t_config *config)
 		while (config->map.grid[i][j])
 		{
 			c = config->map.grid[i][j];
-			if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+			if (c == WALKABLE || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 			{
 				if (check_position(config, j, i) < 0)
 					return (-1);
@@ -77,14 +79,14 @@ int	check_sides(t_config *config, int row)
 	if (len == 0)
 		return (0);
 	i = 0;
-	while (i < len && config->map.grid[row][i] == ' ')
+	while (i < len && config->map.grid[row][i] == NOT_WALKABLE)
 		i++;
-	if (i < len && config->map.grid[row][i] != '1')
+	if (i < len && config->map.grid[row][i] != WALL)
 		return (-1);
 	i = len - 1;
-	while (i >= 0 && config->map.grid[row][i] == ' ')
+	while (i >= 0 && config->map.grid[row][i] == NOT_WALKABLE)
 		i--;
-	if (i >= 0 && config->map.grid[row][i] != '1')
+	if (i >= 0 && config->map.grid[row][i] != WALL)
 		return (-1);
 	return (0);
 }

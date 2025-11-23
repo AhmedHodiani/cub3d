@@ -7,10 +7,16 @@
 # include "libftsscanf.h"
 # include "libgc.h"
 # include "libgnl.h"
+# include <limits.h>
 
 
 # define WIDTH 500
 # define HEIGHT 500
+
+/* Map tile types */
+# define WALL '1'
+# define WALKABLE '0'
+# define NOT_WALKABLE ' '
 
 /* Map parsing structures */
 

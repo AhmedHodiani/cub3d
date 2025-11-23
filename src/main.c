@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 18:45:08 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 14:42:21 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 15:38:24 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,26 @@ void	ft_exit(int code, const char *message)
 	exit(code);
 }
 
+void print_map_with_blocks(char **grid, int height)
+{
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; grid[i][j]; j++)
+		{
+			if (grid[i][j] == '1')
+				ft_printf("██");
+			else if (grid[i][j] == '0')
+				ft_printf("  ");
+			else if (grid[i][j] == ' ')
+				ft_printf("··");
+			else
+				ft_printf("%c ", grid[i][j]);
+		}
+		ft_printf("\n");
+	}
+}
+
+
 int	main(int argc, char **argv)
 {
 	t_config	config;
@@ -38,8 +58,7 @@ int	main(int argc, char **argv)
 		config.map.width, config.map.height,
 		config.map.player_pos[0], config.map.player_pos[1]);
 	ft_printf("Map grid:\n");
-	for (int i = 0; i < config.map.height; i++)
-		ft_printf("[%s]\n", config.map.grid[i]);
+	print_map_with_blocks(config.map.grid, config.map.height);
 	ft_exit(0, NULL);
 	return (0);
 }

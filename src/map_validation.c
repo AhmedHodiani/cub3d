@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 14:38:55 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 15:39:04 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	check_wall_line(const char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != '1' && line[i] != ' ')
+		if (line[i] != WALL && line[i] != NOT_WALKABLE)
 			return (-1);
 		i++;
 	}
