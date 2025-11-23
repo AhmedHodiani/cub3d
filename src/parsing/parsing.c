@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 20:25:48 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 20:31:09 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ int	parse_config_file(t_config *config, char *path)
 	int		fd;
 	int		result;
 	size_t	len;
+
+	ft_memset(config, 0, sizeof(t_config));
 
 	len = ft_strlen(path);
 	if (len < 4 || ft_strcmp(path + len - 4, ".cub") != 0)

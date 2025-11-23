@@ -10,8 +10,15 @@
 # include <limits.h>
 
 
-# define WIDTH 500
-# define HEIGHT 500
+# define WIDTH 800
+# define HEIGHT 600
+
+/* Key codes */
+# define KEY_ESC 65307
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
 
 /* Map tile types */
 # define WALL '1'
@@ -117,5 +124,10 @@ int		is_map_char(char c);
 int		is_map_line(const char *line);
 int		get_line_length(const char *line);
 int		store_map_line(t_config *config, char *line, int idx);
+
+/* Game/MLX functions */
+int		close_window(t_game	*game);
+int		handle_keypress(int keycode, void *game);
+void	*game_loop(void *game);
 
 #endif
