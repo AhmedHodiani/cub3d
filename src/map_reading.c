@@ -6,11 +6,21 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 14:40:02 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 18:36:11 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	is_non_empty_line(const char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ' || line[i] == '\t')
+		i++;
+	return (line[i] && line[i] != '\n');
+}
 
 static int	process_map_lines(t_config *config, int fd)
 {
@@ -29,12 +39,21 @@ static int	process_map_lines(t_config *config, int fd)
 			if (store_map_line(config, line, idx++) < 0)
 				return (free(line), -1);
 		}
-		else if (map_started && line[0] != '\n')
+		else if (map_started && is_non_empty_line(line))
 			return (free(line), -1);
 		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
+	if (line)
+	{
+		while (line)
+		{
+			if (is_non_empty_line(line))
+				return (free(line), -1);
+			free(line);
+			line = get_next_line(fd);
+		}
+	}
 	return (0);
 }
 

@@ -46,7 +46,7 @@ header="${GREEN}======================================
 
 # Mode selection
 if [[ $1 == "auto" ]]; then
-    maps=(maps/invalid/*.cub maps/valid/*.cub)
+    maps=(maps/invalid/* maps/valid/*)
     total=${#maps[@]}
     index=0
 
@@ -70,6 +70,45 @@ if [[ $1 == "auto" ]]; then
             break
         fi
     done
+elif [[ $1 == "light" ]]; then
+    invalid_maps=(maps/invalid/*)
+    valid_maps=(maps/valid/*)
+
+    echo -e "$header"
+    printf "%-40s | %-8s\n" "File" "Result"
+    echo "-----------------------------------------------"
+
+    # Invalid maps
+    for map in "${invalid_maps[@]}"; do
+        ./build/cub3D "$map" > /dev/null 2>&1
+        status=$?
+        if [[ $status -eq 0 ]]; then
+            color=$GREEN
+            result="SUCCESS"
+        else
+            color=$RED
+            result="FAIL"
+        fi
+        printf "%-40s | ${color}%-8s${NC}\n" "$map" "$result"
+    done
+
+    # Divider
+    echo "-----------------------------------------------"
+
+    # Valid maps
+    for map in "${valid_maps[@]}"; do
+        ./build/cub3D "$map" > /dev/null 2>&1
+        status=$?
+        if [[ $status -eq 0 ]]; then
+            color=$GREEN
+            result="SUCCESS"
+        else
+            color=$RED
+            result="FAIL"
+        fi
+        printf "%-40s | ${color}%-8s${NC}\n" "$map" "$result"
+    done
+
 else
     if [[ -f "$1" ]]; then
         echo -e "$header"

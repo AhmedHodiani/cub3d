@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 16:10:35 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 18:36:11 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,14 @@ void	print_config(t_config *config)
 
 int	set_texture(t_config *config, char **texture, char *path, int flag)
 {
+	int	fd;
+
 	if (config->config_flags & flag)
 		return (-1);
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (-1);
+	close(fd);
 	*texture = gc_strdup(path);
 	if (!*texture)
 		return (-1);

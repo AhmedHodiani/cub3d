@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 18:45:08 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 16:23:12 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 18:36:11 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,13 @@ void print_map(char **grid, int height)
 int	main(int argc, char **argv)
 {
 	t_config	config;
+	size_t		len;
 
 	if (argc != 2)
 		ft_exit(1, "Usage: ./cub3D <map.cub>");
+	len = ft_strlen(argv[1]);
+	if (len < 4 || ft_strcmp(argv[1] + len - 4, ".cub") != 0)
+		ft_exit(1, "Map file must have .cub extension");
 	if (gc_init() != 0)
 		ft_exit(1, "Failed to initialize garbage collector");
 	ft_memset(&config, 0, sizeof(t_config));
