@@ -79,7 +79,22 @@ typedef struct s_game
 # define FLAG_C  0x20
 # define FLAG_ALL 0x3F
 
+/* Parsing functions */
 void	print_config(t_config *config);
-int	parse_config_file(t_config *config, const char *path);
+int		parse_config_file(t_config *config, const char *path);
+int		parse_config_line(t_config *config, const char *line);
+
+/* Texture parsing functions */
+int		parse_texture_no(t_config *config, const char *line);
+int		parse_texture_so(t_config *config, const char *line);
+int		parse_texture_we(t_config *config, const char *line);
+int		parse_texture_ea(t_config *config, const char *line);
+int		set_texture(t_config *config, char **texture, char *path, int flag);
+
+/* Color parsing functions */
+int		parse_color_floor(t_config *config, const char *line);
+int		parse_color_ceiling(t_config *config, const char *line);
+int		set_color(t_config *config, t_color *color, int flag);
+int		validate_color(int r, int g, int b);
 
 #endif
