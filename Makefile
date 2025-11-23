@@ -14,7 +14,10 @@ MINI_LIBX			= $(DEPENDENCIES_DIR)/minilibx-linux/libmlx_Linux.a
 SRCS			=	src/main.c \
 					src/player.c \
 					src/rendering.c \
+					src/rendering_3d.c \
 					src/raycasting.c \
+					src/raycasting_3d.c \
+					src/textures.c \
 					src/timing.c \
 					src/parsing/parsing.c \
 					src/parsing/utils_parsing.c \

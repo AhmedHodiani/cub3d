@@ -20,7 +20,7 @@
 # define ROT_SPEED 2.0
 
 /* Minimap settings */
-# define MINIMAP_SCALE 60
+# define MINIMAP_SCALE 30
 # define MINIMAP_OFFSET_X 20
 # define MINIMAP_OFFSET_Y 20
 # define MINIMAP_COLOR_WALL 0xFFFFFF
@@ -120,6 +120,34 @@ typedef struct s_image
 	int		endian;
 }	t_image;
 
+typedef struct s_texture
+{
+	t_image	img;
+	int		width;
+	int		height;
+}	t_texture;
+
+typedef struct s_ray
+{
+	double	camera_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	int		map_x;
+	int		map_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+}	t_ray;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -129,6 +157,7 @@ typedef struct s_game
 	t_image		img;
 	t_keys		keys;
 	t_time		time;
+	t_texture	textures[4];
 }	t_game;
 
 /* Config flags for validation */
@@ -195,6 +224,18 @@ void	strafe_right(t_game *game, double move_speed);
 void	rotate_left(t_game *game, double rot_speed);
 void	rotate_right(t_game *game, double rot_speed);
 void	process_movement(t_game *game);
+
+/* Texture functions */
+void	load_textures(t_game *game);
+int		get_texture_color(t_texture *texture, int x, int y);
+
+/* Raycasting functions */
+void	init_ray(t_game *game, t_ray *ray, int x);
+void	calculate_step_and_side_dist(t_game *game, t_ray *ray);
+void	perform_dda(t_game *game, t_ray *ray);
+void	calculate_wall_distance(t_game *game, t_ray *ray);
+void	render_3d(t_game *game);
+void	draw_wall_stripe(t_game *game, t_ray *ray, int x);
 
 /* Rendering functions */
 void	render_frame(t_game *game);

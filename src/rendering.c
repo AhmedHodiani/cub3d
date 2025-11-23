@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 00:00:00 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 22:15:48 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 22:43:07 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,7 @@ void	draw_minimap_player(t_game *game)
 
 void	render_frame(t_game *game)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			my_mlx_pixel_put(&game->img, x, y, 0x000000);
-			x++;
-		}
-		y++;
-	}
+	render_3d(game);
 	render_minimap(game);
 	draw_minimap_rays(game);
 	draw_minimap_player(game);

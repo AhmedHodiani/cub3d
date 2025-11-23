@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 18:45:08 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 22:23:46 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/23 22:43:07 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int	main(int argc, char **argv)
 	parse_config_file(&(game.config), argv[1]);
 	
 	init_mlx(&game);
+	load_textures(&game);
 	init_player(&game);
 	game.time.last_frame = get_time_us();
 	game.time.delta_time = 0.016;
