@@ -12,14 +12,14 @@ INCLUDE_FLAGS		= -Iinclude $(foreach lib,$(DEPENDENCIES),-Iinclude/$(lib))
 MINI_LIBX			= $(DEPENDENCIES_DIR)/minilibx-linux/libmlx_Linux.a
 
 SRCS			=	src/main.c \
-					src/parsing.c \
-					src/utils_parsing.c \
-					src/utils_parsing2.c \
-					src/map_parsing.c \
-					src/map_reading.c \
-					src/map_validation.c \
-					src/map_validation2.c \
-					src/map_utils.c
+					src/parsing/parsing.c \
+					src/parsing/utils_parsing.c \
+					src/parsing/utils_parsing2.c \
+					src/parsing/map_parsing.c \
+					src/parsing/map_reading.c \
+					src/parsing/map_validation.c \
+					src/parsing/map_validation2.c \
+					src/parsing/map_utils.c
 OBJS			= $(SRCS:src/%.c=$(BUILD_PATH)/obj/%.o)
 HEADERS			= include/cub3d.h
 
@@ -32,7 +32,7 @@ $(foreach lib,$(DEPENDENCIES),$(BUILD_PATH)/$(lib)/$(lib).a):
 	$(MAKE) -C $(DEPENDENCIES_DIR)/$(basename $(@F)) BUILD_PATH=../../$(BUILD_PATH)/$(basename $(@F)) all
 
 $(BUILD_PATH)/obj/%.o: src/%.c $(HEADERS)
-	@mkdir -p $(BUILD_PATH)/obj
+	@mkdir -p $(BUILD_PATH)/obj/parsing
 	$(CC) $(CFLAGS) $(DEPENDENCIES_FLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 $(MINI_LIBX):

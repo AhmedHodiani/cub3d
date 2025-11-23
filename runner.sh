@@ -12,6 +12,10 @@ show_usage() {
     echo "               Navigate through all maps in maps/invalid/ and maps/valid/ using"
     echo "               → (next) and ← (previous). Press q to quit."
     echo
+    echo "  light      : Light mode."
+    echo "               Tests all maps in maps/invalid/ and maps/valid/ and displays"
+    echo "               a summary table of results (SUCCESS/FAIL) for each map."
+    echo
     echo "  file_path  : Run cub3D on a single map file, e.g.:"
     echo "               ./runner.sh maps/valid/1.cub"
     echo
@@ -76,7 +80,7 @@ elif [[ $1 == "light" ]]; then
 
     echo -e "$header"
     printf "%-40s | %-8s\n" "File" "Result"
-    echo "-----------------------------------------------"
+    echo "---------------------------------------------------"
 
     # Invalid maps
     for map in "${invalid_maps[@]}"; do
@@ -93,7 +97,7 @@ elif [[ $1 == "light" ]]; then
     done
 
     # Divider
-    echo "-----------------------------------------------"
+    echo "---------------------------------------------------"
 
     # Valid maps
     for map in "${valid_maps[@]}"; do

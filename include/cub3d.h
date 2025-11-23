@@ -88,7 +88,7 @@ void	ft_exit(int code, const char *message);
 
 /* Parsing functions */
 void	print_config(t_config *config);
-int		parse_config_file(t_config *config, const char *path);
+int		parse_config_file(t_config *config, char *path);
 int		parse_config_line(t_config *config, const char *line);
 
 /* Texture parsing functions */
