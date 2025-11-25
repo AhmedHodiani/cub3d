@@ -23,6 +23,18 @@ int	validate_color(int r, int g, int b)
 	return (1);
 }
 
+int	is_xpm_file(const char *path)
+{
+	int	len;
+
+	len = ft_strlen(path);
+	if (len < 4)
+		return (0);
+	if (ft_strncmp(path + len - 4, ".xpm", 4) != 0)
+		return (0);
+	return (1);
+}
+
 void	print_config(t_config *config)
 {
 	printf("North Texture: %s\n", config->textures.north);
@@ -43,6 +55,8 @@ int	set_texture(t_config *config, char **texture, char *path, int flag)
 	int	fd;
 
 	if (config->config_flags & flag)
+		return (-1);
+	if (!is_xpm_file(path))
 		return (-1);
 	fd = open(path, O_RDONLY);
 	if (fd < 0)

@@ -197,6 +197,7 @@ int		parse_color_floor(t_config *config, const char *line);
 int		parse_color_ceiling(t_config *config, const char *line);
 int		set_color(t_config *config, t_color *color, int flag);
 int		validate_color(int r, int g, int b);
+int		is_xpm_file(const char *path);
 
 /* Map parsing functions */
 int		parse_map(t_config *config, const char *path);
