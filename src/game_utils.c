@@ -25,12 +25,22 @@ void	ft_exit(int code, const char *message)
 int	close_window(void *game)
 {
 	t_game	*g;
+	int		i;
 
 	g = (t_game *)game;
-	if (g->win)
-		mlx_destroy_window(g->mlx, g->win);
 	if (g->mlx)
 	{
+		if (g->img.img)
+			mlx_destroy_image(g->mlx, g->img.img);
+		i = 0;
+		while (i < 4)
+		{
+			if (g->textures[i].img.img)
+				mlx_destroy_image(g->mlx, g->textures[i].img.img);
+			i++;
+		}
+		if (g->win)
+			mlx_destroy_window(g->mlx, g->win);
 		mlx_destroy_display(g->mlx);
 		free(g->mlx);
 	}
