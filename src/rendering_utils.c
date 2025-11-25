@@ -14,13 +14,18 @@
 
 int	get_tile_color(t_game *game, int map_x, int map_y)
 {
-	if (map_y >= 0 && map_y < game->config.map.height
-		&& map_x >= 0 && map_x < game->config.map.width)
+	int	line_len;
+
+	if (map_y >= 0 && map_y < game->config.map.height && map_x >= 0)
 	{
-		if (game->config.map.grid[map_y][map_x] == WALL)
-			return (MINIMAP_COLOR_WALL);
-		else if (game->config.map.grid[map_y][map_x] == WALKABLE)
-			return (MINIMAP_COLOR_FLOOR);
+		line_len = ft_strlen(game->config.map.grid[map_y]);
+		if (map_x < line_len)
+		{
+			if (game->config.map.grid[map_y][map_x] == WALL)
+				return (MINIMAP_COLOR_WALL);
+			else if (game->config.map.grid[map_y][map_x] == WALKABLE)
+				return (MINIMAP_COLOR_FLOOR);
+		}
 	}
 	return (0x000000);
 }
