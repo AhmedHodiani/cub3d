@@ -13,6 +13,11 @@
 # define WIDTH 1200
 # define HEIGHT 800
 
+/* Field of View (FOV) settings */
+# define FOV 60.0
+# define FOV_RAD (FOV * 3.14159265359 / 180.0)
+# define PLANE_DIST 0.66
+
 /* FPS and timing */
 # define TARGET_FPS 60
 # define FRAME_TIME_US 16666

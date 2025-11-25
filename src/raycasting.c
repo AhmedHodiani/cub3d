@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 00:00:00 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 23:27:11 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/24 15:51:35 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	draw_minimap_rays(t_game *game)
 	double	fov;
 	int		num_rays;
 
-	fov = 60.0 * (3.14159265359 / 180.0);
+	fov = FOV_RAD;
 	num_rays = 1000;
 	i = 0;
 	while (i < num_rays)

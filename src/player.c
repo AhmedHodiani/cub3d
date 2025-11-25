@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 00:00:00 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 23:26:56 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/24 15:51:37 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static void	init_player_north_south(t_game *game)
 	{
 		game->player.dir_x = 0;
 		game->player.dir_y = -1;
-		game->player.plane_x = 0.66;
+		game->player.plane_x = PLANE_DIST;
 		game->player.plane_y = 0;
 	}
 	else if (game->config.map.player_dir == SOUTH)
 	{
 		game->player.dir_x = 0;
 		game->player.dir_y = 1;
-		game->player.plane_x = -0.66;
+		game->player.plane_x = -PLANE_DIST;
 		game->player.plane_y = 0;
 	}
 }
@@ -37,14 +37,14 @@ static void	init_player_west_east(t_game *game)
 		game->player.dir_x = -1;
 		game->player.dir_y = 0;
 		game->player.plane_x = 0;
-		game->player.plane_y = -0.66;
+		game->player.plane_y = -PLANE_DIST;
 	}
 	else if (game->config.map.player_dir == EAST)
 	{
 		game->player.dir_x = 1;
 		game->player.dir_y = 0;
 		game->player.plane_x = 0;
-		game->player.plane_y = 0.66;
+		game->player.plane_y = PLANE_DIST;
 	}
 }
 
