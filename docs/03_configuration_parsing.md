@@ -44,8 +44,8 @@ graph TB
     F --> |Yes| G[Stop config parsing]
     F --> |No| H[parse_config_line]
     H --> I{Recognize<br/>identifier?}
-    I --> |Texture| J[parse_all_textures]
-    I --> |Color| K[parse_all_colors]
+    I --> |Texture| J[try_parse_all_textures_on_line]
+    I --> |Color| K[try_parse_all_colors_on_line]
     I --> |Empty| E
     I --> |Unknown| ERROR1[Error: Invalid identifier]
     J --> L{Parse<br/>successful?}
@@ -369,10 +369,10 @@ int parse_config_line(t_config *config, const char *line)
 {
     int result;
 
-    result = parse_all_textures(config, line);
+    result = try_parse_all_textures_on_line(config, line);
     if (result != 0)
         return (result);
-    result = parse_all_colors(config, line);
+    result = try_parse_all_colors_on_line(config, line);
     if (result != 0)
         return (result);
     if (has_non_empty_content(line))
@@ -386,7 +386,7 @@ int parse_config_line(t_config *config, const char *line)
 ```mermaid
 graph TD
     A["Line: 'NO ./tex/n.xpm'"] --> B[parse_config_line]
-    B --> C[parse_all_textures]
+    B --> C[try_parse_all_textures_on_line]
     C --> D[parse_texture_no]
     D --> E{Match 'NO'?}
     E --> |Yes| F[set_texture]
@@ -400,7 +400,7 @@ graph TD
     F --> |Success| N[Return 1: parsed!]
     F --> |Error| O[Return -1: error!]
     
-    M --> P[parse_all_colors]
+    M --> P[try_parse_all_colors_on_line]
     
     style N fill:#ccffcc
     style O fill:#ffcccc

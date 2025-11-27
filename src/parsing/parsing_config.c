@@ -6,13 +6,13 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 00:00:00 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 23:26:56 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/27 16:40:21 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	parse_all_textures(t_config *config, const char *line)
+static int	try_parse_all_textures_on_line(t_config *config, const char *line)
 {
 	int	result;
 
@@ -29,7 +29,7 @@ static int	parse_all_textures(t_config *config, const char *line)
 	return (result);
 }
 
-static int	parse_all_colors(t_config *config, const char *line)
+static int	try_parse_all_colors_on_line(t_config *config, const char *line)
 {
 	int	result;
 
@@ -56,10 +56,10 @@ int	parse_config_line(t_config *config, const char *line)
 {
 	int		result;
 
-	result = parse_all_textures(config, line);
+	result = try_parse_all_textures_on_line(config, line);
 	if (result != 0)
 		return (result);
-	result = parse_all_colors(config, line);
+	result = try_parse_all_colors_on_line(config, line);
 	if (result != 0)
 		return (result);
 	if (has_non_empty_content(line))

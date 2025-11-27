@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 18:36:11 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/27 17:01:03 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,25 @@ int	set_texture(t_config *config, char **texture, char *path, int flag)
 int	parse_texture_no(t_config *config, const char *line)
 {
 	char	path[256];
+	char c;
 
-	if (ft_sscanf(line, "NO %s", path) == 1)
+	c = '\0';
+	if (ft_sscanf(line, "NO %s %c", path, &c) == 1)
 		return (set_texture(config, &config->textures.north, path, FLAG_NO));
+	if (c != '\0')
+		return (-1);
 	return (0);
 }
 
 int	parse_texture_so(t_config *config, const char *line)
 {
 	char	path[256];
+	char c;
 
-	if (ft_sscanf(line, "SO %s", path) == 1)
+	c = '\0';
+	if (ft_sscanf(line, "SO %s %c", path, &c) == 1)
 		return (set_texture(config, &config->textures.south, path, FLAG_SO));
+	if (c != '\0')
+		return (-1);
 	return (0);
 }
