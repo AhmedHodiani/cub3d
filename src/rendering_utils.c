@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 00:00:00 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 23:26:56 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/28 15:03:12 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	get_tile_color(t_game *game, int map_x, int map_y)
 				return (MINIMAP_COLOR_FLOOR);
 		}
 	}
-	return (0x000000);
+	return (MINIMAP_COLOR_FLOOR);
 }
 
 void	get_camera_start(t_game *game, int *cam_start_x, int *cam_start_y)
