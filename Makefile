@@ -1,15 +1,14 @@
 NAME			= $(BUILD_PATH)/cub3D
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror -Wno-error=cast-function-type
+CFLAGS			= -Wall -Wextra -Werror
 BUILD_PATH		?= ./build
 
 DEPENDENCIES		= libft libftprintf libftsscanf libgc libgnl
 DEPENDENCIES_DIR	= ./dependencies
 DEPENDENCIES_FLAGS	= $(foreach lib,$(DEPENDENCIES),-L$(BUILD_PATH)/$(lib)) \
 						$(foreach lib,$(patsubst lib%,%, $(DEPENDENCIES)),-l$(lib)) \
-						-L$(DEPENDENCIES_DIR)/minilibx-linux -lmlx -lXext -lX11 -lm
+						-lmlx -lXext -lX11 -lm
 INCLUDE_FLAGS		= -Iinclude $(foreach lib,$(DEPENDENCIES),-Iinclude/$(lib))
-MINI_LIBX			= $(DEPENDENCIES_DIR)/minilibx-linux/libmlx_Linux.a
 
 SRCS			=	src/main.c \
 					src/game_utils.c \
@@ -41,7 +40,7 @@ HEADERS			= include/cub3d.h
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(foreach lib,$(DEPENDENCIES),$(BUILD_PATH)/$(lib)/$(lib).a) $(MINI_LIBX) $(HEADERS)
+$(NAME): $(OBJS) $(foreach lib,$(DEPENDENCIES),$(BUILD_PATH)/$(lib)/$(lib).a) $(HEADERS)
 	$(CC) $(CFLAGS) $(OBJS) $(DEPENDENCIES_FLAGS) $(INCLUDE_FLAGS) -o $(NAME)
 
 $(foreach lib,$(DEPENDENCIES),$(BUILD_PATH)/$(lib)/$(lib).a):
@@ -49,15 +48,11 @@ $(foreach lib,$(DEPENDENCIES),$(BUILD_PATH)/$(lib)/$(lib).a):
 
 $(BUILD_PATH)/obj/%.o: src/%.c $(HEADERS)
 	@mkdir -p $(BUILD_PATH)/obj/parsing
-	$(CC) $(CFLAGS) $(DEPENDENCIES_FLAGS) $(INCLUDE_FLAGS) -c $< -o $@
-
-$(MINI_LIBX):
-	$(MAKE) -C $(DEPENDENCIES_DIR)/minilibx-linux CC=gcc-14
+	$(CC) $(CFLAGS) $(INCLUDE_FLAGS) -c $< -o $@
 
 clean:
 	@rm -rf $(BUILD_PATH)/obj
 	@rm -rf $(BUILD_PATH)/lib*/obj
-	$(MAKE) -C $(DEPENDENCIES_DIR)/minilibx-linux clean
 
 fclean: clean
 	@rm -rf $(NAME)

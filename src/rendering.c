@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 00:00:00 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 23:26:56 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/28 15:23:38 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	render_minimap(t_game *game)
 		}
 		screen_y++;
 	}
+	draw_minimap_border(game);
 }
 
 void	draw_minimap_player(t_game *game)

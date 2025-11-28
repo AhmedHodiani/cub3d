@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/28 15:31:41 by ataher            #+#    #+#             */
+/*   Updated: 2025/11/28 15:50:47 by ataher           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "mlx.h"
+# include <mlx.h>
 # include "libft.h"
 # include "libftprintf.h"
 # include "libftsscanf.h"
@@ -15,8 +27,10 @@
 
 /* Field of View (FOV) settings */
 # define FOV 60.0
-# define FOV_RAD (FOV * 3.14159265359 / 180.0)
-# define PLANE_DIST 0.66
+/* FOV_RAD = (FOV * PI / 180.0) */
+# define FOV_RAD 1.047197551
+/* PLANE_DIST = (TAN(FOV / 2)) */
+# define PLANE_DIST 0.57735
 
 /* FPS and timing */
 # define TARGET_FPS 60
@@ -218,7 +232,7 @@ void	init_mlx(t_game *game);
 int		close_window(void *game);
 int		handle_keypress(int keycode, void *game);
 int		handle_keyrelease(int keycode, void *game);
-void	*game_loop(void *game);
+int		game_loop(void *game);
 
 /* Timing functions */
 long	get_time_us(void);
@@ -241,15 +255,14 @@ void	load_textures(t_game *game);
 int		get_texture_color(t_texture *texture, int x, int y);
 
 /* Raycasting functions */
-void		init_ray(t_game *game, t_ray *ray, int x);
-void		calculate_step_and_side_dist(t_game *game, t_ray *ray);
-void		perform_dda(t_game *game, t_ray *ray);
-void		calculate_wall_distance(t_game *game, t_ray *ray);
-void		render_3d(t_game *game);
-void		draw_wall_stripe(t_game *game, t_ray *ray, int x);
-t_texture	*get_wall_texture(t_game *game, t_ray *ray);
-int			calculate_tex_x(t_ray *ray, double wall_x, int tex_width);
-double		calculate_wall_x(t_game *game, t_ray *ray);
+void	init_ray(t_game *game, t_ray *ray, int x);
+void	calculate_step_and_side_dist(t_game *game, t_ray *ray);
+void	perform_dda(t_game *game, t_ray *ray);
+void	calculate_wall_distance(t_game *game, t_ray *ray);
+void	render_3d(t_game *game);
+void	draw_wall_stripe(t_game *game, t_ray *ray, int x);
+int		calculate_tex_x(t_ray *ray, double wall_x, int tex_width);
+double	calculate_wall_x(t_game *game, t_ray *ray);
 
 /* Rendering functions */
 void	render_frame(t_game *game);
@@ -264,5 +277,6 @@ void	get_player_center(t_game *game, int *center_x, int *center_y);
 int		check_wall_hit(t_game *game, int map_x, int map_y);
 int		get_max_steps(int dx, int dy);
 void	init_line_vars(int *coords, float *vars);
+void	draw_minimap_border(t_game *game);
 
 #endif

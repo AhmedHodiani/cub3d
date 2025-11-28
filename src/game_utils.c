@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 00:00:00 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 23:26:56 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/28 15:44:33 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	close_window(void *game)
 	return (0);
 }
 
-void	*game_loop(void *game)
+int	game_loop(void *game)
 {
 	t_game	*g;
 
@@ -57,7 +57,7 @@ void	*game_loop(void *game)
 	process_movement(g);
 	render_frame(g);
 	cap_framerate(g);
-	return (NULL);
+	return (0);
 }
 
 void	init_mlx(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/25 15:41:07 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/28 15:26:10 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int	set_color(t_config *config, t_color *color, int flag)
 
 int	parse_color_floor(t_config *config, const char *line)
 {
-	int	r;
-	int	g;
-	int	b;
-	char c;
+	int		r;
+	int		g;
+	int		b;
+	char	c;
 
 	c = '\0';
 	if (ft_sscanf(line, "F %d,%d,%d %c", &r, &g, &b, &c) != 3)
@@ -57,10 +57,10 @@ int	parse_color_floor(t_config *config, const char *line)
 
 int	parse_color_ceiling(t_config *config, const char *line)
 {
-	int	r;
-	int	g;
-	int	b;
-	char c;
+	int		r;
+	int		g;
+	int		b;
+	char	c;
 
 	c = '\0';
 	if (ft_sscanf(line, "C %d,%d,%d %c", &r, &g, &b, &c) != 3)

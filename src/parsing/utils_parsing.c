@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:27:25 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/27 17:01:03 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/28 15:26:44 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,6 @@ int	is_xpm_file(const char *path)
 	return (1);
 }
 
-void	print_config(t_config *config)
-{
-	printf("North Texture: %s\n", config->textures.north);
-	printf("South Texture: %s\n", config->textures.south);
-	printf("West Texture: %s\n", config->textures.west);
-	printf("East Texture: %s\n", config->textures.east);
-	printf("Floor Color: R=%d, G=%d, B=%d\n",
-		config->floor.r, config->floor.g, config->floor.b);
-	printf("Ceiling Color: R=%d, G=%d, B=%d\n",
-		config->ceiling.r, config->ceiling.g, config->ceiling.b);
-	ft_printf("Map: %dx%d, Player at (%d, %d)\n",
-		config->map.width, config->map.height,
-		config->map.player_pos[0], config->map.player_pos[1]);
-}
-
 int	set_texture(t_config *config, char **texture, char *path, int flag)
 {
 	int	fd;
@@ -72,7 +57,7 @@ int	set_texture(t_config *config, char **texture, char *path, int flag)
 int	parse_texture_no(t_config *config, const char *line)
 {
 	char	path[256];
-	char c;
+	char	c;
 
 	c = '\0';
 	if (ft_sscanf(line, "NO %s %c", path, &c) == 1)
@@ -85,7 +70,7 @@ int	parse_texture_no(t_config *config, const char *line)
 int	parse_texture_so(t_config *config, const char *line)
 {
 	char	path[256];
-	char c;
+	char	c;
 
 	c = '\0';
 	if (ft_sscanf(line, "SO %s %c", path, &c) == 1)

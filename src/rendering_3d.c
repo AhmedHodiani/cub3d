@@ -6,11 +6,29 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 00:00:00 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 23:26:56 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/28 15:51:02 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static t_texture	*get_wall_texture(t_game *game, t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		if (ray->ray_dir_x > 0)
+			return (&game->textures[EAST]);
+		else
+			return (&game->textures[WEST]);
+	}
+	else
+	{
+		if (ray->ray_dir_y > 0)
+			return (&game->textures[SOUTH]);
+		else
+			return (&game->textures[NORTH]);
+	}
+}
 
 static void	draw_textured_wall(t_game *game, t_ray *ray, int x)
 {

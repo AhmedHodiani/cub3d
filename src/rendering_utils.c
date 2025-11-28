@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 00:00:00 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/28 15:03:12 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/28 15:30:35 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,37 @@ void	get_player_center(t_game *game, int *center_x, int *center_y)
 		+ (int)(player_offset_x * MINIMAP_SCALE);
 	*center_y = MINIMAP_OFFSET_Y + (MINIMAP_VIEWPORT_TILES / 2) * MINIMAP_SCALE
 		+ (int)(player_offset_y * MINIMAP_SCALE);
+}
+
+static void	draw_border_lines(t_game *game, int i, int j, int *dims)
+{
+	my_mlx_pixel_put(&game->img, MINIMAP_OFFSET_X + i,
+		MINIMAP_OFFSET_Y + j, 0xFFFFFF);
+	my_mlx_pixel_put(&game->img, MINIMAP_OFFSET_X + i, dims[1] - j,
+		0xFFFFFF);
+	my_mlx_pixel_put(&game->img, MINIMAP_OFFSET_X + j,
+		MINIMAP_OFFSET_Y + i, 0xFFFFFF);
+	my_mlx_pixel_put(&game->img, dims[0] - j, MINIMAP_OFFSET_Y + i,
+		0xFFFFFF);
+}
+
+void	draw_minimap_border(t_game *game)
+{
+	int	i;
+	int	j;
+	int	dims[2];
+
+	dims[0] = MINIMAP_OFFSET_X + MINIMAP_VIEWPORT_TILES * MINIMAP_SCALE;
+	dims[1] = MINIMAP_OFFSET_Y + MINIMAP_VIEWPORT_TILES * MINIMAP_SCALE;
+	i = 0;
+	while (i < MINIMAP_VIEWPORT_TILES * MINIMAP_SCALE)
+	{
+		j = 0;
+		while (j < 3)
+		{
+			draw_border_lines(game, i, j, dims);
+			j++;
+		}
+		i++;
+	}
 }

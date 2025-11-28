@@ -6,7 +6,7 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 00:00:00 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 23:26:56 by ataher           ###   ########.fr       */
+/*   Updated: 2025/11/28 15:26:57 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,19 @@ void	print_map(char **grid, int height)
 		ft_printf("\n");
 		i++;
 	}
+}
+
+void	print_config(t_config *config)
+{
+	printf("North Texture: %s\n", config->textures.north);
+	printf("South Texture: %s\n", config->textures.south);
+	printf("West Texture: %s\n", config->textures.west);
+	printf("East Texture: %s\n", config->textures.east);
+	printf("Floor Color: R=%d, G=%d, B=%d\n",
+		config->floor.r, config->floor.g, config->floor.b);
+	printf("Ceiling Color: R=%d, G=%d, B=%d\n",
+		config->ceiling.r, config->ceiling.g, config->ceiling.b);
+	ft_printf("Map: %dx%d, Player at (%d, %d)\n",
+		config->map.width, config->map.height,
+		config->map.player_pos[0], config->map.player_pos[1]);
 }
