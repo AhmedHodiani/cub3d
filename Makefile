@@ -7,7 +7,7 @@ DEPENDENCIES		= libft libftprintf libftsscanf libgc libgnl
 DEPENDENCIES_DIR	= ./dependencies
 DEPENDENCIES_FLAGS	= $(foreach lib,$(DEPENDENCIES),-L$(BUILD_PATH)/$(lib)) \
 						$(foreach lib,$(patsubst lib%,%, $(DEPENDENCIES)),-l$(lib)) \
-						-lmlx -lXext -lX11 -lm
+						-L./dependencies/minilibx-linux -lmlx -lXext -lX11 -lm
 INCLUDE_FLAGS		= -Iinclude $(foreach lib,$(DEPENDENCIES),-Iinclude/$(lib))
 
 SRCS			=	src/main.c \

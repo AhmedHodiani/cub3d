@@ -6,14 +6,14 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 15:31:41 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/28 15:50:47 by ataher           ###   ########.fr       */
+/*   Updated: 2025/12/27 00:15:19 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <mlx.h>
+# include "mlx.h"
 # include "libft.h"
 # include "libftprintf.h"
 # include "libftsscanf.h"
@@ -22,8 +22,8 @@
 # include <limits.h>
 # include <sys/time.h>
 
-# define WIDTH 1200
-# define HEIGHT 800
+# define WIDTH 1800
+# define HEIGHT 1300
 
 /* Field of View (FOV) settings */
 # define FOV 60.0

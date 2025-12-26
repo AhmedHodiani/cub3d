@@ -6,19 +6,25 @@
 /*   By: ataher <ataher@student.42amman.com>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/22 18:45:08 by ataher            #+#    #+#             */
-/*   Updated: 2025/11/23 23:26:56 by ataher           ###   ########.fr       */
+/*   Updated: 2025/12/27 00:13:31 by ataher           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-function-type"
+
 static void	setup_hooks(t_game *game)
 {
-	mlx_hook(game->win, 2, 1L << 0, (int (*)())handle_keypress, game);
-	mlx_hook(game->win, 3, 1L << 1, (int (*)())handle_keyrelease, game);
-	mlx_hook(game->win, 17, 0, (int (*)())close_window, game);
+	mlx_hook(game->win, 2, 1L << 0, (int (*)(void))handle_keypress, game);
+	mlx_hook(game->win, 3, 1L << 1, (int (*)(void))handle_keyrelease, game);
+	mlx_hook(game->win, 17, 0, (int (*)(void))close_window, game);
 	mlx_loop_hook(game->mlx, game_loop, game);
 }
+
+#pragma GCC diagnostic pop
+
 
 int	main(int argc, char **argv)
 {
