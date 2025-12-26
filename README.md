@@ -8,6 +8,9 @@ Ever wondered how Wolfenstein 3D pulled off that fake-3D magic back in the day? 
 
 ![Screenshot 2](images/s2.png)
 
+## Testing Script: I wrote a validation script that runs through all the test cases automatically. Saved me hours of repetitive work.
+![Gif 1](images/s3.gif)
+
 ## What I Built
 
 The core engine handles raycasting and rendering, but I also wrote a bunch of utility libraries from scratch because, why not make things harder for myself?
